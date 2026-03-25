@@ -1,0 +1,82 @@
+Classification Model (Pass/Fail Prediction)
+   
+    📌 Classification কি?
+
+        👉 Output category হয় (number না)
+        👉 যেমন:
+
+        Pass / Fail
+        Spam / Not Spam
+        Yes / No
+
+    📌 Example Problem
+        👉 Study Hour → Pass / Fail predict
+
+    📌 1. Dataset তৈরি
+                import numpy as np
+
+                # input (study hour)
+                X = np.array([[1],[2],[3],[4],[5],[6]])
+
+                # output (0 = Fail, 1 = Pass)
+                y = np.array([0,0,0,1,1,1])
+
+    📌 2. Model (Logistic Regression) ⭐
+                from sklearn.linear_model import LogisticRegression
+
+                model = LogisticRegression()
+
+    📌 3. Train
+                model.fit(X, y)
+
+    📌 4. Prediction
+                pred = model.predict([[4]])
+                print(pred)
+
+                👉 Output:
+
+                [1]
+
+                👉 Meaning:
+                👉 4 ঘন্টা পড়লে → Pass ✅
+
+    📌 5. Probability (important)
+                print(model.predict_proba([[4]]))
+
+                👉 Output example:
+
+                [[0.2 0.8]]
+
+                👉 Meaning:
+
+                20% Fail
+                80% Pass
+
+    📌 6. Full Example
+                    from sklearn.linear_model import LogisticRegression
+                    import numpy as np
+
+                    X = np.array([[1],[2],[3],[4],[5],[6]])
+                    y = np.array([0,0,0,1,1,1])
+
+                    model = LogisticRegression()
+                    model.fit(X, y)
+
+                    print("Prediction:", model.predict([[4]]))
+                    print("Probability:", model.predict_proba([[4]]))
+                    🎯 Mini Practice
+                    X = np.array([[2],[4],[6],[8]])
+                    y = np.array([0,0,1,1])
+
+                    👉 5 দিলে pass/fail predict করো
+
+    ⚠️ Important Tips
+                Classification → category output
+                Logistic Regression → basic classifier
+                predict_proba() → confidence বুঝায়
+
+    📌 Summary
+            Classification → yes/no problem
+            LogisticRegression → model
+            predict() → class
+            predict_proba() → probability
