@@ -1,0 +1,178 @@
+ Machine Learning Introduction + First Model
+
+    📌 Machine Learning কি?
+
+    👉 Machine Learning = Computer নিজে নিজে data থেকে শিখে decision নেয়
+
+    👉 Example:
+            Student marks → pass/fail predict
+            House price predict
+            Spam email detect
+
+    📌 ML এর basic flow
+         Data → Train Model → Prediction
+
+    📌 Types of ML (basic idea)
+        Supervised Learning (label আছে) ⭐
+            👉 Input + Output দেওয়া থাকে
+
+        Unsupervised Learning
+            👉 শুধু input থাকে
+
+    👉 আমরা এখন Supervised Learning দিয়ে শুরু করবো
+
+    📌 1. Scikit-learn install
+    pip install scikit-learn
+
+                Note:
+                     Scikit-learn কী?
+
+                            👉 Scikit-learn হলো Python-এর একটা Machine Learning library
+                            যেটা ব্যবহার করে আমরা সহজে ML model তৈরি করতে পারি
+
+                    📌 সহজভাবে বুঝো
+                            👉 Machine Learning = computer কে data দিয়ে শেখানো
+                            👉 Scikit-learn = সেই শেখানোর জন্য ready-made tools
+
+                     এটা দিয়ে কী করা যায়?
+                        ✅ 1. Classification
+                            👉 data কে category-তে ভাগ করা
+                            📌 Example: spam email detect
+
+                        ✅ 2. Regression
+                            👉 number predict করা
+                            📌 Example: house price prediction
+
+                        ✅ 3. Clustering
+                            👉 similar data group করা
+                            📌 Example: customer segmentation
+
+                        ✅ 4. Data preprocessing
+                            👉 data clean করা (missing value, scaling)
+                            
+    📌 2. First ML Model (Linear Regression) ⭐
+
+        👉 Simple example:
+                Study Hour → Marks predict
+
+                Note:
+                    First ML Model – Linear Regression
+
+                    Scenario:
+                            তুমি predict করতে চাও Study Hour → Marks
+                            অর্থাৎ, পড়ার ঘণ্টা বাড়লে student-এর marks কত হবে
+
+                    1️⃣ Linear Regression কি?
+
+                    Linear Regression হলো একটা supervised machine learning algorithm যা:
+
+                    numeric data predict করে
+                    relationship বোঝে line equation দিয়ে:
+                                                        y=mx+c
+                                                            x = input (Study Hour)
+                                                            y = output (Marks)
+                                                            m = slope (line-এ growth rate)
+                                                            c = intercept (line x-axis cut point)
+
+                    Goal: input X দিয়ে output y predict করা
+
+        📌 Step by Step Code
+                from sklearn.linear_model import LinearRegression
+                import numpy as np
+                                       Explain:
+                                                 👉 sklearn.linear_model হলো scikit-learn library এর একটি module,
+                                                    যা linear models তৈরি করার জন্য use হয়।
+                                                 sklearn.linear_model.LinearRegression → ML model
+                                                 numpy → array বা data matrix তৈরি করতে
+
+                # input (study hours)
+                X = np.array([[1],[2],[3],[4],[5]])
+                 # output (marks)
+                y = np.array([20, 40, 50, 70, 90])
+                                        Explain:
+                                            X → independent variable (study hours)
+                                            y → dependent variable (marks)
+                                            Note: X must be 2D array → [[1],[2],...]
+               
+
+                # model তৈরি
+                model = LinearRegression()
+                                        Explain:
+                                            Empty model তৈরি হলো
+                                            এখনও কিছু শিখেনি
+
+                # train
+                model.fit(X, y)
+                                        Explain:
+                                            Model data থেকে best-fit line খুঁজে বের করে
+                                            Slope m এবং Intercept c calculate করে
+
+                # prediction
+                pred = model.predict([[6]])
+                print(pred)
+                                        Explain:
+                                            pred = model.predict([[6]])
+                                            Input = 6 hours
+                                            Model predict করবে Marks
+                                            Formula internally ব্যবহার করে:
+                # model.coef_ = slope (m)                         
+                print("Slope (m):", model.coef_)
+
+                #model.intercept_ = intercept (c)
+                print("Intercept (c):", model.intercept_)
+                                                                      y=m⋅x+c
+        📌 Explanation (Important)
+                👉 X = input (feature)
+                👉 y = output (target)
+
+                👉 fit() = model শেখানো
+                👉 predict() = prediction করা
+
+        📌 Output Meaning
+                👉 যদি output আসে:
+
+                [~100]
+
+                👉 মানে:
+                👉 6 ঘন্টা পড়লে ≈ 100 marks (approx)
+
+                Note:
+                    Interpretation:
+                            Slope (m): [18.0]
+                            Intercept (c): 2.0
+                            marks=18∗study_hours+2
+                            6 hour পড়লে → 18*6 + 2 = 110
+                            Model predict করবে ≈ 110 marks
+
+    📌 3. Visualization (understand better)
+                import matplotlib.pyplot as plt
+
+                plt.scatter(X, y)          # actual data
+                plt.plot(X, model.predict(X))  # model line
+
+                plt.show()
+
+                👉 Line দেখাবে → model কিভাবে fit করেছে
+
+    🎯 Mini Practice
+                from sklearn.linear_model import LinearRegression
+                import numpy as np
+
+                X = np.array([[1],[2],[3]])
+                y = np.array([10, 20, 30])
+
+                model = LinearRegression()
+                model.fit(X, y)
+
+                print(model.predict([[4]]))
+    
+    ⚠️ Important Tips
+                ML = data based learning
+                Linear Regression = simplest model
+                input shape 2D হতে হবে [[1],[2]]
+
+    📌 Summary
+            ML = data → learning → prediction
+            fit() → train
+            predict() → output
+            Linear Regression → first model
