@@ -53,6 +53,12 @@ Train/Test Split + Accuracy
                 0.9+ = very good
                 কম হলে model improve করতে হবে
 
+                    Note:
+                        🔹 model.score() কী?
+
+                        👉 এটা R² score (R-squared) return করে
+                        Formula: R²=1-....
+
     📌 4. Full Example
                 from sklearn.model_selection import train_test_split
                 from sklearn.linear_model import LinearRegression
