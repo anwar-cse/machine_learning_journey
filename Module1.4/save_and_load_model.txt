@@ -1,0 +1,60 @@
+ Save & Load Model (Professional ML)
+
+
+    ##  কেন দরকার?
+            👉 তুমি একবার model train করলা
+            ❌ বারবার train করা লাগবে না
+
+            👉 save করে রাখো → পরে load করে use করো 
+
+    ## 1. Model Save করা
+
+    👉 আমরা ব্যবহার করবো **joblib**
+
+                        import joblib
+                        from sklearn.linear_model import LinearRegression
+
+                        # sample model
+                        model = LinearRegression()
+                        model.fit([[1], [2], [3]], [10, 20, 30])
+
+                        # save model
+                        joblib.dump(model, "model.pkl")
+   
+
+    📌 এখানে "model.pkl" = saved file
+
+
+    ## 2. Model Load করা
+
+            import joblib
+
+            # load model
+            model = joblib.load("model.pkl")
+
+            # use model
+            prediction = model.predict([[4]])
+            print(prediction)
+    
+            ##  Output Example
+                            [40.]
+
+
+    ## Important Concept
+
+    👉 .pkl file = trained brain 
+    👉 load করলেই ready model 
+
+    ## Real Life Use
+
+            👉 ML API বানানো (Flask / Django)
+            👉 Mobile app এ use
+            👉 Production system
+
+    ## Short Summary
+                👉 joblib.dump() = save
+                👉 joblib.load() = load
+                👉 time save + efficient
+
+
+   
