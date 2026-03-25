@@ -1,0 +1,111 @@
+    ML Pipeline মানে কী?
+
+    👉 Step-by-step process automation:
+
+            Data → Preprocessing → Model → Prediction
+
+            👉 সবকিছু একসাথে bundle করা = Pipeline 
+
+            🔹 কেন Pipeline দরকার?
+
+                    ❌ Manual করলে:
+                            বারবার code লিখতে হয়
+                            ভুল হওয়ার chance বেশি
+
+                    ✅ Pipeline করলে:
+                            clean code
+                            reusable
+                            professional
+    🔹 Step by Step Code
+                    from sklearn.pipeline import Pipeline
+                    from sklearn.preprocessing import StandardScaler
+                    from sklearn.linear_model import LinearRegression
+                                                    Explain:
+                                                    Pipeline → step গুলো একসাথে run করার জন্য
+                                                    StandardScaler → data normalize করার জন্য
+                                                    LinearRegression → model train করার জন্য
+
+                    # Pipeline তৈরি
+                    pipe = Pipeline([
+                        ("scaler", StandardScaler()),   # data normalize
+                        ("model", LinearRegression())   # model
+                    ])
+
+                    # Data
+                    X = [[1], [2], [3], [4], [5]]
+                    y = [10, 20, 30, 40, 50]
+
+                    # Train
+                    pipe.fit(X, y)
+
+                    # Predict
+                    pred = pipe.predict([[6]])
+                    print(pred)
+    🔹 কী হচ্ছে এখানে?
+                👉 StandardScaler()
+
+                👉 data scale করে (0 mean, unit variance)
+                👉 model ভালো কাজ করে
+
+    👉 Pipeline([...])
+
+             👉 step গুলো এক লাইনে connect করছে
+
+     Visualization Idea
+                        Input → Scaler → Model → Output
+
+    🔹 Output Example
+                     [60.]
+
+     Real Industry Use
+                    👉 Data preprocessing + model একসাথে
+                    👉 Deployment এ easy
+                    👉 Team work friendly
+
+
+Note:
+
+        Pipeline আসলে কি?
+
+                    👉 Pipeline = একটা machine (chain system)
+                    যেখানে data একটার পর একটা step পার হয়ে final result দেয়
+
+                    🏭 Real Life Example (Factory)
+
+                    ধরো তুমি একটা factory চালাও:
+
+                    🧼 Washing (clean)
+                    🔪 Cutting
+                    🍳 Cooking
+                    🍽️ Serving
+
+                    👉 তুমি কি আলাদা আলাদা করে সব করবে?
+                    ❌ না
+
+                    👉 একটা pipeline system বানাবে
+                    ➡️ একদিকে raw input দিবা → শেষে ready food বের হবে 
+
+        💻 Machine Learning এ Pipeline
+
+                    তোমার code এ 👇
+
+                    pipe = Pipeline([
+                        ("scaler", StandardScaler()),
+                        ("model", LinearRegression())
+                    ])
+
+                    👉 এর মানে:
+
+                    scaler → data clean/normalize
+                    model → prediction
+
+                    👉 একটার output → next এ input
+
+        🔄 Flow Diagram
+                        Input Data (X)
+                            ↓
+                        StandardScaler (normalize)
+                            ↓
+                        LinearRegression (train/predict)
+                            ↓
+                        Final Output
