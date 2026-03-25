@@ -1,0 +1,65 @@
+Using Real Dataset (CSV) in Scikit-learn
+  
+    Problem
+    👉 ধরো আমাদের কাছে student data আছে students.csv:
+
+                Hours	Marks
+                1	35
+                2	40
+                3	50
+                4	65
+                5	70
+
+    আমরা prediction করতে চাই → ঘন্টা অনুযায়ী marks estimate করা
+
+    🔹 Step by Step Code
+                import pandas as pd
+                from sklearn.model_selection import train_test_split
+                from sklearn.linear_model import LinearRegression
+
+                # 1. CSV Load
+                data = pd.read_csv("students.csv")
+
+                # 2. Data Check
+                print(data.head())
+
+                # 3. Features & Target
+                X = data[["Hours"]]  # feature
+                y = data["Marks"]    # target
+
+                # 4. Split
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+                # 5. Model
+                model = LinearRegression()
+
+                # 6. Train
+                model.fit(X_train, y_train)
+
+                # 7. Predict
+                pred = model.predict(X_test)
+                print("Actual:", y_test.values)
+                print("Predicted:", pred)
+
+                # 8. Accuracy
+                print("R2 Score:", model.score(X_test, y_test))
+
+    🔹 Key Points
+                pd.read_csv() → CSV file read করার জন্য
+                X = data[["Hours"]] → 2D array required by Scikit-learn
+                y = data["Marks"] → target variable
+                Everything else = same as before
+
+    🔹 Output Example
+                Actual: [50 70]
+                Predicted: [52.3 68.7]
+                R2 Score: 0.98
+
+    🔹 Real Use
+            👉 তুমি যে কোন CSV dataset দিয়ে experiment করতে পারো
+            (ex: house price, sales, exam results)
+
+    🔹 Short Summary
+            ✅ Real dataset = project ready
+            ✅ Pandas + Scikit-learn = ML workflow
+            ✅ Split → Train → Predict → Accuracy
