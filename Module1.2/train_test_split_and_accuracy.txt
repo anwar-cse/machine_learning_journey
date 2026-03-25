@@ -1,0 +1,94 @@
+Train/Test Split + Accuracy
+
+    📌 কেন দরকার?
+
+        👉 যদি তুমি সব data দিয়ে train করো
+        👉 তাহলে model আসলেই ভালো নাকি শুধু মুখস্থ করছে — বুঝা যাবে না ❌
+
+        👉 তাই data দুই ভাগ করি:
+                            Train data → শেখানোর জন্য
+                            Test data → পরীক্ষা করার জন্য
+
+    📌 1. Train/Test Split ⭐
+                from sklearn.model_selection import train_test_split
+                import numpy as np
+
+                X = np.array([[1],[2],[3],[4],[5],[6]])
+                y = np.array([10,20,30,40,50,60])
+
+                # split
+                X_train, X_test, y_train, y_test = train_test_split(
+                    X, y, test_size=0.2
+                )
+
+                print(X_train)
+                print(X_test)
+
+                        👉 test_size=0.2 → 20% test, 80% train
+
+    📌 2. Model Train + Test
+                from sklearn.linear_model import LinearRegression
+
+                model = LinearRegression()
+
+                # train
+                model.fit(X_train, y_train)
+
+                # test prediction
+                pred = model.predict(X_test)
+
+                print(pred)
+
+    📌 3. Accuracy / Score ⭐
+                score = model.score(X_test, y_test)
+                print(score)
+
+                👉 Output:
+
+                0.95 (example)
+
+                👉 Meaning:
+
+                1.0 = perfect
+                0.9+ = very good
+                কম হলে model improve করতে হবে
+
+    📌 4. Full Example
+                from sklearn.model_selection import train_test_split
+                from sklearn.linear_model import LinearRegression
+                import numpy as np
+
+                X = np.array([[1],[2],[3],[4],[5],[6]])
+                y = np.array([10,20,30,40,50,60])
+
+                # split
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+                # model
+                model = LinearRegression()
+
+                # train
+                model.fit(X_train, y_train)
+
+                # test
+                print(model.predict(X_test))
+
+                # accuracy
+                print("Score:", model.score(X_test, y_test))
+
+    🎯 Mini Practice
+                X = np.array([[1],[2],[3],[4]])
+                y = np.array([5,10,15,20])
+
+                👉 split করে model run করো
+
+    ⚠️ Important Tips
+                সব data দিয়ে train করো না ❌
+                test data দিয়ে evaluation করো ✔️
+                accuracy high মানেই সবসময় best না (later বুঝবে)
+
+    📌 Summary
+            train_test_split() → data ভাগ
+            fit() → train
+            predict() → test
+            score() → accuracy
