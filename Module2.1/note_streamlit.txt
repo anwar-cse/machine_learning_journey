@@ -1,0 +1,48 @@
+🚀 Streamlit কী?
+
+        👉 Streamlit হলো একটা Python library
+        যা দিয়ে তুমি খুব সহজে web app বানাতে পারো (HTML/CSS না জেনেও)
+
+🎯 সহজভাবে
+        👉 Python code → Web App 
+
+🧠 কেন Streamlit use করবো?
+
+    ✅ Machine Learning project show করতে
+    ✅ Data visualize করতে
+    ✅ Dashboard বানাতে
+    ✅ .pkl model use করে prediction app বানাতে
+
+⚙️ কিভাবে কাজ করে?
+
+        👉 তুমি Python code লিখবা
+        👉 Streamlit সেটা browser এ UI বানায়
+
+🏗️ Basic Structure: app.py
+        import streamlit as st
+
+        st.title("My First App")
+        st.write("Hello Anwar ")
+
+👉 run করলে browser এ show করবে
+
+        ▶️ Run করার নিয়ম
+                        streamlit run app.py
+
+🧩 Important Components
+     1️⃣ Text show
+        st.title("Title")
+        st.header("Header")
+        st.write("Anything")
+
+    2️⃣ Input নেওয়া
+        name = st.text_input("Enter your name")
+        st.write(name)
+
+     3️⃣ Button
+        if st.button("Click me"):
+            st.write("Button clicked!")
+            
+     4️⃣ Number Input (ML এর জন্য useful)
+        hours = st.number_input("Study Hours")
+        sleep = st.number_input("Sleep Hours")

@@ -1,0 +1,22 @@
+Student Performance Predictor Web App
+
+1. Install Streamlit:
+            pip install streamlit
+2.run file:
+            code.ipynb 
+
+3.Project Structure
+                student_ml_app/
+                ├── student_data.csv
+                ├── reg_pipeline.pkl
+                ├── dt_pipeline.pkl
+                ├── knn_pipeline.pkl
+                └── app.py         
+ 4.Then
+    VS code editor Terminal open করে তোমার project folder-এ যাও:  cd Module2.1
+    then,Run command : streamlit run app.py   
+    finally,
+            👉 automatically browser open হবে
+            👉 URL হবে এরকম:
+                            http://localhost:8501
+            👉 এখন তুমি input দিবে → Predict চাপলে result দেখাবে
