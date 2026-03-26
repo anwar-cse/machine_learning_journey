@@ -1,0 +1,131 @@
+Popular ML Models (Decision Tree & KNN)
+
+    এখন আমরা Scikit-learn এর
+    👉 দুইটা খুব জনপ্রিয় algorithm শিখবো:
+                                    🌳 Decision Tree
+                                    👥 K-Nearest Neighbors (KNN)
+    🌳 1. Decision Tree
+    🎯 Idea
+            👉 tree structure দিয়ে decision নেয়
+                                                Hours > 3 ?
+                                                ├── Yes → Pass
+                                                └── No  → Fail
+    🔹 Code Example
+                from sklearn.tree import DecisionTreeClassifier
+
+                # Data
+                X = [[1], [2], [3], [4], [5]]
+                y = [0, 0, 0, 1, 1]
+
+                # Model
+                model = DecisionTreeClassifier()
+
+                # Train
+                model.fit(X, y)
+
+                # Predict
+                print(model.predict([[4]]))
+
+         Output
+                [1]
+                👉 Pass ✅
+
+    🔹 Advantage
+                ✅ Easy to understand
+                ✅ No need scaling
+                ✅ Works with small data
+
+    👥 2. K-Nearest Neighbors (KNN)
+            🎯 Idea
+
+            👉 কাছের data দেখে decision নেয়
+
+            👉 “তোমার আশেপাশের neighbors কী করছে?” 
+
+    🔹 Code Example
+            from sklearn.neighbors import KNeighborsClassifier
+
+            # Data
+            X = [[1], [2], [3], [4], [5]]
+            y = [0, 0, 0, 1, 1]
+
+            # Model (k=3)
+            model = KNeighborsClassifier(n_neighbors=3)
+
+            # Train
+            model.fit(X, y)
+
+            # Predict
+            print(model.predict([[4]]))
+
+     Output
+            [1]
+
+    🔹 Concept
+            👉 KNN দেখে 3টা closest point
+            👉 majority vote → result
+
+    ** Decision Tree vs KNN
+            Feature	Decision Tree	KNN
+            Speed	Fast	Slow
+            Scaling	Not needed	Needed
+            Logic	Rule-based	Distance-based
+
+    🔹 Short Summary
+            ✅ Decision Tree = rule based
+            ✅ KNN = neighbor based
+            ✅ দুটোই powerful
+
+
+            Note:
+                🔹 KNN কী?
+                    KNN = K-Nearest Neighbors
+                    এটা supervised learning algorithm
+                    Classification: কোন class assign করতে
+                    Regression: value predict করতে
+
+                Concept খুব simple:
+                    👉 “কোন point এর nearest neighbors কে দেখো, তার based করে decision নাও”
+                🔹 কাজ করার পদ্ধতি
+
+                     ধরা যাক, তোমার dataset:
+
+                        Student	Hours	Marks
+                        A	2	Fail
+                        B	4	Pass
+                        C	5	Pass
+                        D	1	Fail
+
+                Step 1: নতুন data point নেওয়া
+                        ধরো নতুন student X = 3 hours
+                        আমরা predict করবো Pass/Fail
+
+                Step 2: Distance measure করা
+                        KNN nearest neighbor খোঁজে distance অনুযায়ী
+                        Common distance: Euclidean distance
+                                        d=root[(x2​−x1​)2+(y2​−y1​)2]
+​ ​
+
+                Step 3: K নির্ধারণ করা
+                        ধরো K = 3
+                        nearest 3 neighbors খুঁজে বের করো
+
+                        X = 3 hours এর nearest neighbors:
+
+                        A (2 hours, Fail)
+                        B (4 hours, Pass)
+                        C (5 hours, Pass)
+                        Step 4: Majority vote / Average
+                        Classification: majority vote
+                        neighbors = [Fail, Pass, Pass]
+                        Majority = Pass ✅
+                        Regression: average of neighbors' values
+
+                Step 5: Predict
+                         Student X → Pass
+
+                🔹 Summary Concept
+                        KNN কোনো model train করে না (lazy learner)
+                        Distance function দিয়ে nearest points খুঁজে বের করে
+                        K neighbors এর majority vote বা average নেয়
+                        Prediction দেয়
