@@ -1,0 +1,123 @@
+Data Preprocessing (Missing Values & Encoding)
+
+    👉 Real-world data কখনো clean থাকে না 
+    তাই Scikit-learn use করার আগে data clean করতে হয়
+
+    ** Problem Types
+                1. Missing Values (ডাটা নাই)
+                2. Categorical Data (text data)
+
+    🔹 1. Missing Values Handle করা
+
+            👉 ধরো data:
+                        Age	Marks
+                        20	50
+                        NaN	60
+                        22	70
+
+            ✔️ Solution: Mean দিয়ে fill করা
+                    import pandas as pd
+
+                    data = pd.read_csv("data.csv")
+
+            # missing value fill
+                    data["Age"] = data["Age"].fillna(data["Age"].mean())
+
+                    print(data)
+
+            ** Concept
+                    👉 fillna() = empty জায়গা পূরণ
+                    👉 mean() = average value
+
+    🔹 2. Categorical Data Encoding
+
+        👉 ধরো:
+                City	Marks
+                Dhaka	50
+                Rajshahi	60
+                Dhaka	70
+
+        👉 Machine text বুঝে না ❌
+        👉 number এ convert করতে হয় ✅
+
+        ✔️ Solution: Encoding
+                    from sklearn.preprocessing import LabelEncoder
+
+                    le = LabelEncoder()
+
+                    data["City"] = le.fit_transform(data["City"])
+
+                    print(data)
+
+        🔹 Output Example
+                    City   Marks
+                    0   0     50
+                    1   1     60
+                    2   0     70
+
+        ** Concept
+                👉 Dhaka = 0
+                👉 Rajshahi = 1
+
+        ** Bonus (Very Important)
+
+            👉 Better method = One-Hot Encoding (next level)
+
+                    data = pd.get_dummies(data, columns=["City"])
+
+            👉 Output:
+                    City_Dhaka	City_Rajshahi	Marks
+                    1	0	50
+                    0	1	60
+
+    🔹 Short Summary
+
+            ✅ Missing → fillna()
+            ✅ Text → LabelEncoder / OneHot
+            ✅ Clean data = better model 
+
+    ## Real ML Flow
+         👉 Raw Data → Cleaning → Encoding → Model
+
+
+         Note:
+            🔹 Problem: Machine Learning & Categorical Data
+                    Machine learning model text (string) বুঝতে পারে না
+                    যেমন: City = "Dhaka", "Rajshahi"
+                    তাই numeric এ convert করতে হয়
+
+                    এটা আমরা Encoding দিয়ে করি
+
+            🔹 Concept সহজভাবে
+                    LabelEncoder() internally একটা mapping dictionary তৈরি করে
+                    যেটা বলে কে কোন number হবে
+                    LabelEncoder() সব unique category কে alphabetical order বা appearance order অনুযায়ী number assign করে
+
+            উদাহরণ:
+
+                        import pandas as pd
+                        from sklearn.preprocessing import LabelEncoder
+
+                        data = pd.DataFrame({
+                            "City": ["Dhaka", "Rajshahi", "Dhaka", "Chittagong", "Sylhet", "Rajshahi"],
+                            "Marks": [50, 60, 70, 80, 90, 65]
+                        })
+
+                        le = LabelEncoder()
+                        data["City_Num"] = le.fit_transform(data["City"])
+
+                        print(data)
+                        print("Mapping:", dict(zip(le.classes_, le.transform(le.classes_))))
+
+            output:
+                            City  Marks  City_Num
+                    0       Dhaka     50         1
+                    1    Rajshahi     60         3
+                    2       Dhaka     70         1
+                    3  Chittagong     80         0
+                    4       Sylhet     90         4
+                    5    Rajshahi     65         3
+
+            Mapping: {'Chittagong': 0, 'Dhaka': 1, 'Rajshahi': 3, 'Sylhet': 4}
+
+            তারপর model numeric data বুঝে এবং train করতে পারে
